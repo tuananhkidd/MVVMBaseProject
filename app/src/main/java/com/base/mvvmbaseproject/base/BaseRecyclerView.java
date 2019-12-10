@@ -115,7 +115,7 @@ public class BaseRecyclerView<T> extends RelativeLayout implements EndlessLoadin
         this.listener = loadingMoreListener;
     }
 
-    public void onItemClickListener(RecyclerViewAdapter.OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(RecyclerViewAdapter.OnItemClickListener onItemClickListener) {
         mAdapter.addOnItemClickListener(onItemClickListener);
     }
 

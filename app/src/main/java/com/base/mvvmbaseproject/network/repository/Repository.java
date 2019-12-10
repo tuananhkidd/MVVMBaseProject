@@ -21,7 +21,7 @@ public class Repository {
     }
 
     public Single<ListResponse<SearchResponse>> search(int pageIndex) {
-        return apiInterface.search("mi",pageIndex)
+        return apiInterface.search("h",pageIndex)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

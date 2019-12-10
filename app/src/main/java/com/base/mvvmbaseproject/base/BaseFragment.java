@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
-
 import com.base.mvvmbaseproject.utils.Define;
 import com.base.mvvmbaseproject.utils.DialogUtil;
 
@@ -91,7 +90,7 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
         setArguments(bundle);
     }
 
-    protected <K> void handleListResponse(ListResponse<K> response) {
+    protected void handleListResponse(ListResponse<?> response) {
         switch (response.getType()) {
             case Define.ResponseStatus.LOADING:
                 DialogUtil.getInstance(getContext()).show();
@@ -101,26 +100,26 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
                 DialogUtil.getInstance(getContext()).hidden();
                 break;
             case Define.ResponseStatus.ERROR:
-                handleNetworkError(response.getError(),true);
+                handleNetworkError(response.getError(), true);
                 DialogUtil.getInstance(getContext()).hidden();
         }
     }
 
-    protected <K> void
-    handleLoadMoreResponse(ListResponse<K> response,boolean isRefresh,boolean canLoadmore) {
+    protected void handleLoadMoreResponse(ListResponse<?> response, boolean isRefresh, boolean canLoadmore) {
         switch (response.getType()) {
             case Define.ResponseStatus.LOADING:
 //                DialogUtil.getInstance(getContext()).show();
                 break;
             case Define.ResponseStatus.SUCCESS:
-                getListResponse(response.getData(),isRefresh,canLoadmore);
+                getListResponse(response.getData(), isRefresh, canLoadmore);
                 DialogUtil.getInstance(getContext()).hidden();
                 break;
             case Define.ResponseStatus.ERROR:
-                handleNetworkError(response.getError(),true);
+                handleNetworkError(response.getError(), true);
                 DialogUtil.getInstance(getContext()).hidden();
         }
     }
+
     protected <U> void handleObjectResponse(ObjectResponse<U> response) {
         switch (response.getStatus()) {
             case Define.ResponseStatus.LOADING:
@@ -131,19 +130,20 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
                 DialogUtil.getInstance(getContext()).hidden();
                 break;
             case Define.ResponseStatus.ERROR:
-                handleNetworkError(response.getError(),true);
+                handleNetworkError(response.getError(), true);
                 DialogUtil.getInstance(getContext()).hidden();
         }
     }
-    protected <K> void getListResponse(List<K> data) {
+
+    protected void getListResponse(List<?> data) {
 
     }
 
-    protected <K> void getListResponse(List<K> data,boolean isRefresh,boolean canLoadmore) {
+    protected void getListResponse(List<?> data, boolean isRefresh, boolean canLoadmore) {
 
     }
 
-    protected <U> void getObjectResponse(U data){
+    protected <U> void getObjectResponse(U data) {
 
     }
 
