@@ -70,7 +70,6 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> {
     @Override
     protected void getListResponse(List<?> data, boolean isRefresh, boolean canLoadmore) {
         binding.rcvSearch.enableLoadmore(canLoadmore);
-        binding.rcvSearch.enableRefresh(false);
         if (isRefresh) {
             binding.rcvSearch.refresh(data);
         } else {

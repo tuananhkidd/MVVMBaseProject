@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:brv_padding="10dp"
+        app:brv_text_no_result="Khong co ket qua nao het! Ahihi"
         app:brv_enable_refresh="false"
         />
 

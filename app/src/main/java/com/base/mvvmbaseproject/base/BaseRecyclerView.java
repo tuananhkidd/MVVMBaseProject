@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -23,6 +24,8 @@ public class BaseRecyclerView<T> extends RelativeLayout implements EndlessLoadin
     private OnLoadmoreListener listener;
     RecyclerView rcv;
     SwipeRefreshLayout swipeRefresh;
+    RelativeLayout rlNoResult;
+    TextView tvNoResult;
 
 
     public BaseRecyclerView(Context context) {
@@ -47,7 +50,11 @@ public class BaseRecyclerView<T> extends RelativeLayout implements EndlessLoadin
         View view = LayoutInflater.from(context).inflate(R.layout.layout_base_recyclerview,this,true);
         rcv = view.findViewById(R.id.rcv);
         swipeRefresh = view.findViewById(R.id.swipeRefresh);
+        rlNoResult = view.findViewById(R.id.layout_no_result);
+        tvNoResult = view.findViewById(R.id.tv_no_result);
         float padding = a.getDimension(R.styleable.BaseRecyclerView_brv_padding, 0);
+        String textNoResult = a.getString(R.styleable.BaseRecyclerView_brv_text_no_result);
+        tvNoResult.setText(textNoResult);
         if (padding != 0) {
             rcv.setPadding((int) padding, (int) padding, (int) padding, (int) padding);
         } else {
@@ -84,8 +91,8 @@ public class BaseRecyclerView<T> extends RelativeLayout implements EndlessLoadin
     }
 
     public void setGridLayoutManager(int spanCount) {
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, spanCount);
-        ((GridLayoutManager) layoutManager).setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+        GridLayoutManager layoutManager = new GridLayoutManager(context, spanCount);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
                 if (mAdapter.getItemViewType(position) == EndlessLoadingRecyclerViewAdapter.VIEW_TYPE_LOADING) {
@@ -98,7 +105,12 @@ public class BaseRecyclerView<T> extends RelativeLayout implements EndlessLoadin
     }
 
     public void refresh(List<T> data) {
-        mAdapter.refresh(data);
+        if(data.size() == 0){
+            rlNoResult.setVisibility(View.VISIBLE);
+        }else {
+            rlNoResult.setVisibility(View.GONE);
+            mAdapter.refresh(data);
+        }
         swipeRefresh.setRefreshing(false);
     }
 
