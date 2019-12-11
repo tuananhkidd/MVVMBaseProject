@@ -42,8 +42,7 @@ public class SearchAdapter extends EndlessLoadingRecyclerViewAdapter<ItemSearchB
 
         @Override
         public void bind(SearchResponse data) {
-            binding.tvName.setText(data.getName());
-            binding.tvPrice.setText(data.getId() + "  " + data.getPrice());
+            binding.setSearch(data);
         }
     }
 }
