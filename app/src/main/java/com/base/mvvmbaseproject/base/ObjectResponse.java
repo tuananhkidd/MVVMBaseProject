@@ -7,8 +7,8 @@ import com.base.mvvmbaseproject.utils.Define;
 
 import io.reactivex.annotations.Nullable;
 
-public class ObjectResponse<T> {
-    private int status;
+public class ObjectResponse<T> extends BaseResponse {
+    private int type;
 
     @Nullable
     private T data;
@@ -19,8 +19,8 @@ public class ObjectResponse<T> {
     public ObjectResponse() {
     }
 
-    public int getStatus() {
-        return status;
+    public int getType() {
+        return type;
     }
 
     public T getData() {
@@ -32,7 +32,7 @@ public class ObjectResponse<T> {
     }
 
     private ObjectResponse(int status, T data, Throwable error) {
-        this.status = status;
+        this.type = status;
         this.data = data;
         this.error = error;
     }

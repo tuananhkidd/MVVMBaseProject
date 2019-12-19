@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -86,7 +84,7 @@ public class BaseRecyclerView<T> extends RelativeLayout implements EndlessLoadin
     }
 
     public void setListLayoutManager(int orientation) {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context, orientation, false);
         rcv.setLayoutManager(layoutManager);
     }
 

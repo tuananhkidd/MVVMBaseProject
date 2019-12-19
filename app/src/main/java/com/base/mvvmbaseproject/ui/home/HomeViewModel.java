@@ -12,7 +12,7 @@ import javax.inject.Inject;
 public class HomeViewModel extends BaseViewModel {
     private Repository repository;
     private MutableLiveData<ListLoadmoreReponse<SearchResponse>> search = new MutableLiveData<>();
-    private int pageIndex = 1;
+    private int pageIndex =  1;
 
     @Inject
     public HomeViewModel(Repository repository) {
